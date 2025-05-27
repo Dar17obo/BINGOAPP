@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Bingo APP</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: url('background.png') no-repeat center center fixed;
+            background-size: cover;
+            font-family: sans-serif;
+        }
+        #bola {
+            font-size: 5em;
+            color: yellow;
+            text-align: center;
+            margin-top: 80px;
+        }
+        #boton {
+            display: block;
+            margin: 20px auto;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="bola">-</div>
+    <button id="boton"><img src="BUTON.png" alt="Tirar Bola" width="200"></button>
+
+    <audio id="audioInicio" src="SONIDO PRIMER BOLILLAR.mp3"></audio>
+    <audio id="audioSiguiente" src="SIGUIENTE NUMERO.mp3"></audio>
+
+    <script>
+        const bola = document.getElementById("bola");
+        const boton = document.getElementById("boton");
+        const audioInicio = document.getElementById("audioInicio");
+        const audioSiguiente = document.getElementById("audioSiguiente");
+
+        let numeros = Array.from({ length: 90 }, (_, i) => i + 1);
+        let usados = [];
+        let primerTiro = true;
+
+        boton.addEventListener("click", () => {
+            if (numeros.length === 0) {
+                bola.innerText = "¡Fin!";
+                return;
+            }
+
+            const indice = Math.floor(Math.random() * numeros.length);
+            const numero = numeros.splice(indice, 1)[0];
+            usados.push(numero);
+            bola.innerText = numero;
+
+            if (primerTiro) {
+                audioInicio.play();
+                primerTiro = false;
+            } else {
+                audioSiguiente.play();
+            }
+        });
+    </script>
+</body>
+</html>
