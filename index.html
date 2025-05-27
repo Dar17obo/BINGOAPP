@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bingo APP</title>
+  <style>
+    body {
+      margin: 0;
+      background: url('background.png') no-repeat center center fixed;
+      background-size: cover;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      color: yellow;
+    }
+    .logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 80px;
+    }
+    .dev-logo {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      width: 120px;
+    }
+    .numero {
+      font-size: 80px;
+      font-weight: bold;
+      margin-top: 100px;
+    }
+    .boton {
+      font-size: 30px;
+      padding: 15px 40px;
+      margin-top: 20px;
+      background: orange;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <img src="logo.png" alt="logo" class="logo" />
+  <div id="numero" class="numero">00</div>
+  <button class="boton" onclick="tirarBola()">TIRAR BOLA</button>
+  <img src="logo.png" alt="logo dev" class="dev-logo" />
+  <audio id="audio" src="https://www.soundjay.com/button/sounds/button-09.mp3"></audio>
+  <script>
+    let bolas = Array.from({length: 90}, (_, i) => i + 1);
+    function tirarBola() {
+      if (bolas.length === 0) return;
+      const index = Math.floor(Math.random() * bolas.length);
+      const bola = bolas.splice(index, 1)[0];
+      document.getElementById("numero").textContent = bola.toString().padStart(2, "0");
+      document.getElementById("audio").play();
+    }
+  </script>
+</body>
+</html>
